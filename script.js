@@ -21,12 +21,24 @@ function display(){
     const container = document.querySelector(".container");
     container.style.border = "solid 1px red";
     container.innerHTML = "<h1>My Library</h1>"
+    container.addEventListener("click", (event) =>{
+        if (event.target.tagName === "BUTTON" && event.target.textContent === "Remove Book"){
+            const bookId = event.target.dataset.id;
+            
+            const bookIndex = myLibrary.findIndex(book => book.id === bookId);
+            if (bookIndex !== -1){
+                myLibrary.splice(bookIndex, 1);
+            }
+
+            display();
+        }
+    });
 
     for (const book of myLibrary){
         const content = document.createElement("div");
         content.style.border = "solid 1px blue";
         content.style.borderRadius = "20px"
-        content.innerHTML = `<h3>${book.title}</h3><p>${book.author}</p><p>${book.pages}</p><p>${book.read}</p>`;
+        content.innerHTML = `<h3>${book.title}</h3><p>${book.author}</p><p>${book.pages}</p><p>${book.read}</p><button type = "submit" data-id = "${book.id}">Remove Book</button>`;
         container.appendChild(content);
     }
 }
@@ -55,6 +67,6 @@ submitButton.addEventListener("click", (event) =>{
     addBookToLibrary(book_Title, book_Author, book_Pages, book_Status);
     display();
     event.preventDefault();
+    dialog.close();
 });
-
 
