@@ -12,23 +12,53 @@ const myLibrary = [];
 // ============================
 
 // Constructor function for creating Book Objects.
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.id = crypto.randomUUID();
-}
+// function Book(title, author, pages, read) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.read = read;
+//   this.id = crypto.randomUUID();
+// }
 
 // Returns a formatted string describing the book.
-Book.prototype.info = function () {
-  return `${this.title} by ${this.author}, ${this.pages}, is ${this.read}.`;
-};
+// Book.prototype.info = function () {
+//   return `${this.title} by ${this.author}, ${this.pages}, is ${this.read}.`;
+// };
 
 // Toggles the read status between "Read" and "Not Read"
-Book.prototype.readStatus = function () {
-  this.read = this.read === "Read" ? "Not Read" : "Read";
-};
+// Book.prototype.readStatus = function () {
+//   this.read = this.read === "Read" ? "Not Read" : "Read";
+// };
+
+
+// This is part of the chapter classes from TOP.
+
+// Now I am making the use of classes so that I can add the constructor
+// and the other functions of the constructor in one place.
+// Since, the functions created above will all be the prototype functions in classes, by default.
+
+// =======
+// Classes
+// =======
+
+
+class Book{
+  constructor(title, author, pages, read){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    this.id = crypto.randomUUID();
+  }
+
+  info(){
+    return `${this.title} by ${this.author}, ${this.pages}, is ${this.read}`;
+  };
+
+  readStatus(){
+    this.read = this.read === "Read" ? "Not Read" : "Read";
+  };
+}
 
 // =============================
 // Library Logic (State Updates)
