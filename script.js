@@ -150,15 +150,33 @@ closeButton.addEventListener("click", () => {
 });
 
 
+const book_Author = document.getElementById("bookAuthor");
+
 // Handle new book submission
 submitButton.addEventListener("click", (event) => {
+
+
+  // Custom JS Validation
+  if (book_Author.value.trim() === ""){
+    book_Author.setCustomValidity("Author name must be filled");
+  }else {
+    book_Author.setCustomValidity("");
+  }
+  // Checking the Validity 
+  if (!book_Author.checkValidity()) {
+    book_Author.reportValidity();
+    event.preventDefault();
+    return;
+  }
+
   let book_Title = document.querySelector("#bookTitle").value;
-  let book_Author = document.querySelector("#bookAuthor").value;
+  let book_Author_Value = document.querySelector("#bookAuthor").value;
   let book_Pages = document.querySelector("#bookPages").value;
   let book_Status = document.querySelector("#bookStatus").value;
 
-  addBookToLibrary(book_Title, book_Author, book_Pages, book_Status);
+  addBookToLibrary(book_Title, book_Author_Value, book_Pages, book_Status);
   display();
   event.preventDefault();
   dialog.close();
 });
+
